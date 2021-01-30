@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
+    <!-- Required meta tags -->
+    <meta name="baidu-site-verification" content="U67Xy1Qfos" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="../static/images/favicon.ico" th:href="@{/images/me2.jpeg}" rel="icon" type="image/x-ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css" th:href="@{/lib/editormd/css/editormd.min.css}">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+
+    <!--title-->
+    <title th:replace="${title}">fragments</title>
+</head>
+
+<body>
+<!-- Nav bar-->
+<nav th:fragment="nav" id="nav" class="gird-header" style="display: none">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui olive header item" style="font-family: STSong">Aurora</h2>
+            <!--<div class="right m-item item m-mobile-hide">-->
+            <a href="#" th:href="@{/}" class="active m-item item"><i class="home icon"></i>首页</a>
+            <a href="#" th:href="@{/types/-1}" class="m-item item"><i class="clone outline icon"></i>分类</a>
+            <a href="#" th:href="@{/archives}" class="m-item item"><i class="clock icon"></i>时间轴</a>
+            <a href="#" th:href="@{/music}" class="m-item item"><i class="music icon"></i>音乐盒</a>
+            <a href="#" th:href="@{/message}" class="m-item item"><i class="book icon"></i>留言板</a>
+            <a href="#" th:href="@{/friends}" class="m-item item"><i class="pencil alternate icon"></i>友人帐</a>
+            <a href="#" th:href="@{/about}" class="m-item item"><i class="info icon"></i>关于我</a>
+            <!--</div>-->
+            <div class="right m-item item">
+                <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+                    <div class="ui icon transparent input m-margin-tb-tiny" style="color: white">
+                        <input style="color: white" type="text" name="query" placeholder="Search...." th:value="${query}">
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-hide" style="display: none">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--footer-->
+<footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-massive m-opacity">
+    <!--容器-->
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="four wide column">
+                <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced m-margin-top-max" >联系我</div>
+                <!--<div id="newblog-container">-->
+                <!--<div class="ui inverted link list" th:fragment="newblogList">-->
+                <!--<a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item m-text-thin" th:each="blog : ${newblogs}" th:text="${blog.title}">最新文章</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="ui inverted link list">
+                    <div href="#" class="m-text-thin">Email：byrlc1117@gmail.com</div>
+                    <div href="#" class="m-text-thin">QQ：451519704</div>
+                </div>
+            </div>
+
+            <div class="four wide column" >
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <!--微信二维码-->
+                        <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced " >店家微信</div>
+                        <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+
+            <div class="four wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <!--QQ-->
+                        <div style="font-size: large;font-weight: bold" class="ui inverted m-text-thin m-text-spaced " >店家QQ</div>
+                        <img src="../static/images/qq.jpg" th:src="@{/images/qq.jpg}"  class="ui m-margin-top rounded image" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <!--博客运行时间统计-->
+            <div class="four wide column">
+                <div style="font-size: large;font-weight: bold" class="ui inverted  m-text-thin m-text-spaced m-margin-top">酒馆信息</div>
+                <!--<p id="htmer_time" class="item m-text-thin"></p>-->
+                <div id="blog-message">
+                    <div class="ui inverted link list" style="align-content: center;margin-top: 10px" th:fragment="blogMessage">
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px;">
+                            文章总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogTotal}"> 14 </h2> 篇
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            访问总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogViewTotal}"> 14 </h2> 次
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            评论总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogCommentTotal}"> 14 </h2> 条
+                        </div>
+                        <div class="m-text-thin" style="text-align: left;margin-left: 75px">
+                            留言总数： <h2 class="ui orange header m-inline-block m-margin-top-null" style="font-size:medium;" th:text="${blogMessageTotal}"> 14 </h2> 条
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <div style="color: #F08047;margin-top: -18px" class="ui inverted m-text-thin m-text-spaced">我的酒馆已营业：<span id="htmer_time" class="item m-text-thin"></span> (*๓´╰╯`๓)</div>
+        <a rel="nofollow" href="http://www.beian.miit.gov.cn" target="_blank">冀ICP备20004408号-1</a>
+    </div>
+    </div>
+
+</footer>
+
+<!-- JavaScript -->
+<th:block th:fragment="script">
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+
+    <script>
+
+        // $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+
+        $('#blog-message').load(/*[[@{/footer/blogmessage}]]*/"/footer/blogmessage");
+
+
+        // 运行时间统计
+        function secondToDate(second) {
+            if (!second) {
+                return 0;
+            }
+            var time = new Array(0, 0, 0, 0, 0);
+            if (second >= 365 * 24 * 3600) {
+                time[0] = parseInt(second / (365 * 24 * 3600));
+                second %= 365 * 24 * 3600;
+            }
+            if (second >= 24 * 3600) {
+                time[1] = parseInt(second / (24 * 3600));
+                second %= 24 * 3600;
+            }
+            if (second >= 3600) {
+                time[2] = parseInt(second / 3600);
+                second %= 3600;
+            }
+            if (second >= 60) {
+                time[3] = parseInt(second / 60);
+                second %= 60;
+            }
+            if (second > 0) {
+                time[4] = second;
+            }
+            return time;
+        }
+        function setTime() {
+            /*此处为网站的创建时间*/
+            var create_time = Math.round(new Date(Date.UTC(2021, 1, 16, 0, 0, 0)).getTime() / 1000);
+            var timestamp = Math.round((new Date().getTime() + 31 * 60 * 60 * 24 * 1000 + 8 * 60 * 60 * 1000) / 1000);
+            currentTime = secondToDate((timestamp - create_time));
+            currentTimeHtml = currentTime[0] + '年' + currentTime[1] + '天'
+                + currentTime[2] + '时' + currentTime[3] + '分' + currentTime[4]
+                + '秒';
+            document.getElementById("htmer_time").innerHTML = currentTimeHtml;
+        }
+        setInterval(setTime, 1000);
+
+
+        var waypoint = new Waypoint({
+            element: document.getElementById('waypoint'),
+            handler: function(direction) {
+                if (direction == 'down') {
+                    $('#toolbar').show(100);
+                } else {
+                    $('#toolbar').hide(500);
+                }
+                console.log('Scrolled to waypoint!  ' + direction);
+            }
+        })
+
+
+        $('.menu.toggle').click(function () {
+            $('.m-item').toggleClass('m-mobile-show');
+
+        });
+
+        // 显示公众号
+        $('.tencent').popup({
+            popup : $('.tencent-qr'),
+            position: 'bottom center'
+        });
+
+        // 显示微信
+        $('.wechat').popup({
+            popup : $('.wechat-qr'),
+            position: 'bottom center'
+        });
+
+        // 显示QQ
+        $('.qq').popup({
+            popup : $('.qq-qr'),
+            position: 'bottom center'
+        });
+
+        // 显示邮箱
+        $('.email').popup();
+
+
+        // 显示github
+        $('.github').popup();
+
+        // 导航栏显示
+        var waypoint = new Waypoint({
+            element: document.getElementById('waypoint'),
+            handler: function(direction) {
+                if (direction == 'down') {
+                    $('#nav').show(500);
+                } else {
+                    $('#nav').hide(500);
+                }
+                console.log('Scrolled to waypoint!  ' + direction);
+            }
+        })
+
+        var a_idx = 0;
+        jQuery(document).ready(function($) {
+            $("body").click(function(e) {
+                var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正" ,"法治", "爱国", "敬业", "诚信", "友善");
+                var $i = $("<span/>").text(a[a_idx]);
+                a_idx = (a_idx + 1) % a.length;
+                var x = e.pageX,
+                    y = e.pageY;
+                $i.css({
+                    "z-index": 999999999999999999999999999999999999999999999999999999999999999999999,
+                    "top": y - 20,
+                    "left": x,
+                    "position": "absolute",
+                    "font-weight": "bold",
+                    "color": "#ff6651"
+                });
+                $("body").append($i);
+                $i.animate({
+                        "top": y - 180,
+                        "opacity": 0
+                    },
+                    1500,
+                    function() {
+                        $i.remove();
+                    });
+            });
+        });
+    </script>
+</th:block>
+
+</body>
+</html>
